@@ -1,8 +1,27 @@
 #!/bin/bash
 
-# Setup
+# Check if dependencies are installed
+
+if ! command -v docker &> /dev/null
+then
+    echo "docker could not be found, please install it to proceed."
+    exit 1
+fi
+
+# Check if KONNECT_TOKEN is set
+
+if [ -z "$KONNECT_TOKEN" ]; then
+  echo "KONNECT_TOKEN is not set. Please set it to proceed."
+  exit 1
+fi
+
+# Set default values for environment variables if not set
 
 export KONNECT_REGION=${KONNECT_REGION:-eu}
+export KONG_CLUSTER_CONTROL_PLANE=""
+export KONG_CLUSTER_SERVER_NAME=""
+export KONG_CLUSTER_TELEMETRY_ENDPOINT=""
+export KONG_CLUSTER_TELEMETRY_SERVER_NAME=""
 
 # Get Insomnia-Demo Kong Konnect Control Plane ID 
 
