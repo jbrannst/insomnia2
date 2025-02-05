@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Check if dependencies are installed
+
 if ! command -v openssl &> /dev/null
 then
     echo "openssl could not be found, please install it to proceed."
@@ -25,7 +26,14 @@ then
     exit 1
 fi
 
-# Setup
+# Check if KONNECT_TOKEN is set
+
+if [ -z "$KONNECT_TOKEN" ]; then
+  echo "KONNECT_TOKEN is not set. Please set it to proceed."
+  exit 1
+fi
+
+# Set default values for environment variables if not set
 
 export KONNECT_REGION=${KONNECT_REGION:-eu}
 

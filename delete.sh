@@ -14,7 +14,7 @@ export "KONNECT_CONTROL_PLANE_ID=$(curl --request GET \
 # Delete Insomnia-Demo Konnect Control Plane
 
 curl --request DELETE \
-  --url https://${KONNECT_REGION}.api.konghq.com/v2/control-planes/${KONNECT_CONTROL_PLANE_ID} \
+  --url "https://${KONNECT_REGION}.api.konghq.com/v2/control-planes/${KONNECT_CONTROL_PLANE_ID}" \
   --header 'accept: */*' \
   --header "Authorization: Bearer ${KONNECT_TOKEN}"
 
