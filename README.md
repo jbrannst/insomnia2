@@ -12,36 +12,35 @@ We’ll start where developers care most—the code—by examining the repositor
 
 Manual Testing Pain
 
-Login to Insomnia
+Login to Insomnia:
 
 - SSO integration
 - Storage Controls
 
-Request Collections
+Request Collections:
 
 - Environments
 - Request Chaining
 - Pre-request Scripting
 - Faker.js
 
-Design Documents
+Design Documents:
 
 - Generation of Collection
 - Authentication
 - Private Environments
 - Git Sync
 
-Testing
+Testing:
 
 - Collections Runner
 - After-Response Scripting for Testing
 - Upload CSV Data
 
-Automation
+Automation:
 
 - Inso CLI
 - Run as part of a pipeline
-- Konnect Integration
 
 Mocking
 
@@ -66,7 +65,7 @@ This demonstration environment has been tested with the following:
 
 #### Fork this Repository
 
-Fork this repository or clone it to your own repository
+Fork this repository or clone it to your own repository.
 
 #### Configure Environment
 
@@ -103,11 +102,11 @@ This will do the following:
 
 Guidance available here:
 
-https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners#adding-a-self-hosted-runner-to-a-repository
+<https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners#adding-a-self-hosted-runner-to-a-repository>
 
 #### Setup GitHub Repository Secrets
 
-> Optional: Only required if you want to show integration with a real CI/CD pipeline
+> Optional: Only required if you want to show integration with a real CI/CD pipeline.
 
 Set the following Actions Secrets in your GitHub Repository:
 
@@ -117,7 +116,7 @@ Set the following Actions Secrets in your GitHub Repository:
 
 Guidance available here:
 
-https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions
+<https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions>
 
 #### Clean-up
 
@@ -137,22 +136,21 @@ sh delete.sh
 
 ### Section 1: Leading with Code
 
-#### Tell
+#### 1.1 Tell
 
 This is a simple Go applications which offers CRUD operations on a list of employees. We can present the repository and show the resources and methods available
 
-#### Show
+#### 1.2 Show
 
 Show Employee directory code in repository and show endpoints
 
-https://github.com/macdonald-kong/insomnia-demo/blob/master/src/main.go
+<https://github.com/macdonald-kong/insomnia-demo/blob/master/src/main.go>
 
 Specifically, highlight this part which shows what exactly our code is doing:
 
 ![alt text](./docs/images/s1-1.png "Application Code")
 
-
-#### Tell
+#### 1.3 Tell
 
 >**TODO**
 
@@ -160,11 +158,11 @@ Specifically, highlight this part which shows what exactly our code is doing:
 
 ### Section 2: Manual Testing with cURL
 
-#### Tell
+#### 2.1 Tell
 
 Without a tool like Insomnia in place, invocation of APIs is cumbersome and complex using cURL.  This  is especially so when working with OAuth and chaining requests together.  This section we establish the pain of manual testing.
 
-#### Show
+#### 2.2 Show
 
 Send a Get Request and observe that it fails as we dont have any credentials
 
@@ -174,7 +172,6 @@ curl -s http://localhost:8000/api/employees | jq .
 
 ![alt text](./docs/images/s2-2.png "Authentication Failure")
 
-
 Get an Access Token from KeyCloak:
 
 ``` bash
@@ -182,7 +179,6 @@ curl -s -X POST http://localhost:8080/realms/insomnia-demo/protocol/openid-conne
 ```
 
 ![alt text](./docs/images/s2-3.png "Getting a Token")
-
 
 This time get the Access Token and save to an environment variable.  Highlight how clunky this is getting already:
 
@@ -216,7 +212,7 @@ curl -s http://localhost:8000/api/employees/15 -H "Authorization: Bearer $TOKEN"
 curl -s -X DELETE http://localhost:8000/api/employees/15 -H "Authorization: Bearer $TOKEN" | jq .
 ```
 
-#### Tell
+#### 2.3 Tell
 
 >**TODO**
 
@@ -224,40 +220,40 @@ curl -s -X DELETE http://localhost:8000/api/employees/15 -H "Authorization: Bear
 
 ### Section 3: Introduce Insomnia
 
-#### Tell
+#### 3.1 Tell
 
 The purpose of this section is to introduce the Insomnia application and provide a view on the main components, whilst highlighting the governance functionality
 
-#### Show
+#### 3.2 Show
 
 Start logged out so that we can show SSO integration.
 
 Open Insomnia App and Login and use this as the point to talk about SSO integration that we have setup in Kong:
 
-![alt text](./docs/images/s3-3.png "Logging in")
+![Logging in](./docs/images/s3-3.png "Logging in")
 
 Talk about the main objects that we can create:
 
 - Organisations and Projects
 - Collections vs design documents
 
-Navigate to your SE Org and speak about the collaboration between SEs with our Insomnia collections and documents
+Navigate to your SE Org and speak about the collaboration between SEs with our Insomnia collections and documents.
 
-![alt text](./docs/images/s3-1.png "Collaboration")
+![Collaboration](./docs/images/s3-1.png "Collaboration")
 
 Navigate to your Personal Org
 
 Create new Local Project in your personal Org and talk about storage control limitations that can be put in place:
 
-![alt text](./docs/images/s3-4.png "Storage")
+![Storage](./docs/images/s3-4.png "Storage")
 
 > Optional Step: You will need an account that has access to this page, if not, just use slides or a talk track on the previous page.
 
 Show rules on Insomnia Cloud (have this open in a tab in your browser already):
 
-![alt text](./docs/images/s3-2.png "Governance")
+![Governance](./docs/images/s3-2.png "Governance")
 
-#### Tell
+#### 3.3 Tell
 
 >**TODO**
 
@@ -265,15 +261,15 @@ Show rules on Insomnia Cloud (have this open in a tab in your browser already):
 
 ### Section 4: Request Collections
 
-#### Tell
+#### 4.1 Tell
 
 The purpose of this section is to show how easy it is to create a collections of requests, importing from cURL commands, and to show how comprehensive the Insomnia tooling is.
 
-#### Show
+#### 4.2 Show
 
 Within your Personal Project, create a new Collection and give it the name of your choice:
 
-Talk through different ways of creating requests (multiple protocols, import from other sources)
+Talk through different ways of creating requests (multiple protocols, import from other sources).
 
 Create a request manually and call any endpoint of your choosing.  For example:
 
@@ -289,15 +285,15 @@ Show response content filtering using JSONPath at bottom right hand corner (reme
 $.method
 ```
 
-![alt text](./docs/images/s4-2.png "Third Request")
+![Third Request](./docs/images/s4-2.png "Third Request")
 
-Talk through folders and how they can be used to organise our collection
+Talk through folders and how they can be used to organise our collection.
 
 Create a New Folder called `Employees Directory`
 
 Right click on the new folder and select "From Curl":
 
-![alt text](./docs/images/s4-3.png "curl import")
+![curl import](./docs/images/s4-3.png "curl import")
 
 Copy and paste our request to Keycloak into the text area and click on Import:
 
@@ -305,9 +301,9 @@ Copy and paste our request to Keycloak into the text area and click on Import:
 curl -s -X POST http://localhost:8080/realms/insomnia-demo/protocol/openid-connect/token -H "content-type: application/x-www-form-urlencoded" -H "accept: application/x-www-form-urlencoded, application/json" -H "Authorization: Basic c09yM1VURXd3dUhyajVueXhwRFZOSm5LNUd1b0hFc046OHR4NkhlOGxPcFFWVkQycEJWWnpmbzZaZ3o0a21VZkk=" -d "grant_type=client_credentials"
 ```
 
-![alt text](./docs/images/s4-4.png "First Request")
+![First Request](./docs/images/s4-4.png "First Request")
 
-Rename the Request to `Get Token`
+Rename the Request to `Get Token`.
 
 Send the request and show the response on the right hand pane.
 
@@ -315,7 +311,7 @@ We can then talk about parameterizing the requests so that values dont have to b
 
 Edit the Base Environment underneath Collection Environments:
 
-![alt text](./docs/images/s4-5.png "Environments")
+![Environments](./docs/images/s4-5.png "Environments")
 
 Lets store the KeyCloak base path as an environment variable as so:
 
@@ -339,17 +335,17 @@ Rename the Request to Get All Employees (this isn't essential but does make the 
 
 **Send** the request and show error the Unauthorized Error due to the Token environment variable not being available via the import process:
 
-![alt text](./docs/images/s4-7.png "Todo")
+![Unauthorized Error](./docs/images/s4-7.png "Unauthorized Error")
 
 Mention that you could run our previous command and then quickly copy and paste it across but this wouldnt be scalable.  We can use request chaining to solve for this.
 
 Change this to use request chaining to get the token in the Auhtorization Header by selecting **Response -> Body Attribute**:
 
-![alt text](./docs/images/s4-8.png "Todo")
+![Request Chaining](./docs/images/s4-8.png "Request Chaining")
 
 Click on the red tag and configure this as follows:
 
-![alt text](./docs/images/s4-9.png "Todo")
+![Request Chaining Config](./docs/images/s4-9.png "Request Chaining Config")
 
 Request: `[Employees Directory] POST Get Token`
 Filter: `$.access_token`
@@ -366,16 +362,15 @@ curl -s -X POST http://localhost:8000/api/employees \
   -d '{"id": "15", "name": "Jane Doe", "jobTitle": "Solutions Engineer", "email": "jane%40email.com" }'
 ```
 
-Rename the request to `Create New Employee`
+Rename the request to `Create New Employee`.
 
 Quickly copy and paste the contents of our previous requests Authorization header into the Authorization header for this request so that we can get a token.
 
-**Send** the request and show working
+**Send** the request and show that it has been successful.
 
-Make it more dynamic by using faker.js on all fields apart from the uuid:
+We can now make it more dynamic by using faker.js on all fields apart from the uuid so that we arent sending in the same data every single time (we will come onto the UUID shortly):
 
-![alt text](./docs/images/s4-10.png "Todo")
-
+![Faker.js](./docs/images/s4-10.png "Faker.js")
 
 **Send** the request and bring notice to the response received.
 
@@ -383,8 +378,7 @@ Instead of using faker.js, we can use an external service to get a UUID.  Maybe 
 
 Change the uuid value to `{{uuid}}`
 
-![alt text](./docs/images/s4-11.png "Todo")
-
+![UUID Variable Setup](./docs/images/s4-11.png "UUID Variable Setup")
 
 > Note that this will be red and showing an error but this is expected as the uuid environment variable has not yet been set.
 
@@ -409,13 +403,13 @@ Optional: We can further enhance this script by adding the UUID to a header.  Us
 
 This will be inserted as follows:
 
-```
+``` javascript
 insomnia.request.addHeader({key: 'X-Header-Name', value: 'header_value' });
 ```
 
 Change this to the following and insert it underneath the `console.log` line:
 
-```
+``` javascript
 insomnia.request.addHeader({key: 'X-UUID', value: uuid });
 ```
 
@@ -423,9 +417,9 @@ insomnia.request.addHeader({key: 'X-UUID', value: uuid });
 
 Right click on any of the requests that have been creted so far and show the **Generate Code** options:
 
-![alt text](./docs/images/s4-12.png "Todo")
+![Generate Client Code](./docs/images/s4-12.png "Generate Client Code")
 
-#### Tell
+#### 4.3 Tell
 
 >**TODO**
 
@@ -433,14 +427,13 @@ Right click on any of the requests that have been creted so far and show the **G
 
 ### Section 5: Design Documents
 
-#### Tell
+#### 5.1 Tell
 
 Design Documents (also called Documents) hold specifications, API requests, and tests. They also offer the capability to sync with Git.
 
-Many of our customers prefer to take a Contract First Approach
-APIOps
+> **TODO: Many of our customers prefer to take a Contract First Approach, APIOps**
 
-#### Show
+#### 5.2 Show
 
 Navigate back to your Personal Project
 
@@ -448,25 +441,25 @@ Create a new **Design Document**
 
 Take the OAS file from `./config/oas/oas.yaml` and copy into Insomnia.  Useful to have this open in your text/code editor ahead of time.
 
-Find the issue with the spec and fix it by deleting line 13.
+Find the issue with the OpenAPI Specification and fix it by deleting line 13.
 
-![alt text](./docs/images/s5-1.png "Todo")
+![Fix OAS](./docs/images/s5-1.png "Fix OAS")
 
-Show the interactive documentation in the preview pane on the right.  Chose a request and demonstrate the try it now functionality.  Remember to client the Authorize button first, the client credentials are available in the dialog modal that is presented.
+Show the interactive documentation in the preview pane on the right.  Chose a request and demonstrate the try it now functionality.  Remember to client the Authorize button first, the Client Credentials are available in the modal that is presented.
 
-![alt text](./docs/images/s5-3.png "Todo")
+![Docs Preview Auth](./docs/images/s5-3.png "Docs Preview Auth")
 
 Setup Git Sync to your forked repository on GitHub.
 
-![alt text](./docs/images/s5-2.png "Git Sync Setup")
+![Git Sync Setup](./docs/images/s5-2.png "Git Sync Setup")
 
 **Commit changes** to the GitHub Repository, ensuring that all objects are staged, you provide a sensible commit message and hit Commit and push.
 
-![alt text](./docs/images/s5-7.png "Commiting Changes")
+![Commiting Changes](./docs/images/s5-7.png "Commiting Changes")
 
 Bring up the git repository in GitHub or the tooling of your choice and talk through what has been created in the `.insomnia` folder.
 
-![alt text](./docs/images/s5-8.png "Git Repository Contents")
+![Git Repository Contents](./docs/images/s5-8.png "Git Repository Contents")
 
 Open and talk through the `.spectral.yaml` file found in the root of the repository:
 
@@ -493,15 +486,19 @@ Create a new feature branch and give it the name of your choosing.
 
 Make a minor change to the description field of the OpenAPI Specification file and **Commit and push** the change to the branch as before.  Note the diff viewer so you can see exactly what has changed.
 
+#### 5.3 Tell
+
+>**TODO**
+
 ---
 
 ### Section 6: Testing
 
-#### Tell
+#### 6.1 Tell
 
 >**TODO**
 
-#### Show
+#### 6.2 Show
 
 Generate a Request Collection from the OpenAPI Specification, significantly speeding up the time it has taken us to generate our collection of requests.  Remember all of that importing from cURL?
 
@@ -527,29 +524,29 @@ Create a new **Private environment**, name it Private and add the following:
 }
 ```
 
-![alt text](./docs/images/s6-2.png "Todo")
+![Create Private Environment](./docs/images/s6-2.png "Create Private Environment")
 
 Ensure that the Private Environment is selected:
 
-![alt text](./docs/images/s6-3.png "Todo")
+![Private Environment Selected](./docs/images/s6-3.png "Private Environment Selected")
 
 **Commit and push** changes to your feature branch.
 
-Show that a request works as expected now, with a lot less effort than before.
+Show that a request works as expected now, with a lot less effort than before when we manually imported via Curl.
 
 Show the Auth tab on one of the requests to see that that OAuth configuration to get an Access Token from KeyCloak has been automatically generated.  Talk about the other Authentication methods available by scrolling through the dropdown.
 
-![alt text](./docs/images/s6-4.png "Todo")
+![OAuth Client](./docs/images/s6-4.png "OAuth Client")
 
-Open and Introduce the Collection Runner
+Open and Introduce the Collection Runner.
 
 **Run** it, ensuring all requests are selected and show the result, note to the audience that we havent written any tests as yet:
 
-![alt text](./docs/images/s6-5.png "Todo")
+![Collection Runner](./docs/images/s6-5.png "Collection Runner")
 
 But we can see a lot of useful information in the Console Tab:
 
-![alt text](./docs/images/s6-6.png "Todo")
+![Insomnia Console](./docs/images/s6-6.png "Insomnia Console")
 
 Lets now create our tests by selecting the **Create a new employee** request and opening the **Scripts** tab and clicking the **After-response** tab.
 
@@ -563,7 +560,7 @@ insomnia.test('Check if status is 201', () => {
 
 **Send** the request and open the tests tab on the right to show that the test is passing:
 
-![alt text](./docs/images/s6-7.png "Todo")
+![Test Passing](./docs/images/s6-7.png "Test Passing")
 
 Now do the same for the **Find Employee by ID** request:
 
@@ -609,7 +606,7 @@ body.forEach(item => {
     insomnia.expect(item).to.have.property('name');
     insomnia.expect(item).to.have.property('email');
 });
-	
+
 });
 
 insomnia.test('Check if status is 200', () => {
@@ -621,7 +618,7 @@ insomnia.test('Check if status is 200', () => {
 
 Now open the Collection Runner and select the three requests that we have written tests for:
 
-![alt text](./docs/images/s6-8.png "Todo")
+![Select our requests](./docs/images/s6-8.png "Select our requests")
 
 This is still fairly static, we could make this more interesting by passing in a csv file with our data and then iterate through it.
 
@@ -638,41 +635,45 @@ First we need to parameterise the **Create a new employee** request by changing 
 
 This will show errors on each of the tags but these can be ignored as the data will be pulled from the csv file:
 
-![alt text](./docs/images/s6-9.png "Todo")
+![Parameterize the post request](./docs/images/s6-9.png "Parameterize the post request")
 
 Click on the **Upload Data** button and use the csv file found in this repository `./test/runner.csv`:
 
-![alt text](./docs/images/s6-10.png "Todo")
+![Csv Test Data File](./docs/images/s6-10.png "Csv Test Data File")
 
-The Collection Runner will automatically detected that it needs to iterate 5 times so select the 3 requests and hit Run.  You will see that 25 tests have been executed
+The Collection Runner will automatically detected that it needs to iterate 5 times so select the 3 requests and hit Run.  You will see that 25 tests have been executed.
 
-![alt text](./docs/images/s6-11.png "Collection Runner Tests")
+![Collection Runner Tests](./docs/images/s6-11.png "Collection Runner Tests")
 
 Go to the Console to go into the detail of the tests and show the csv data was injected.
 
-**Commit and push** our changes to the feature branch
+**Commit and push** our changes to the feature branch.
 
-Go to your Git Repository and you will see that a branch has been created
+Go to your Git Repository and you will see that a branch has been created:
 
-![alt text](./docs/images/s6-12.png "New Branch")
+![New Branch Created](./docs/images/s6-12.png "New Branch Created")
 
 We want to merge our feature branch with the main branch but in most organisations the main branch will be protected so we need to go through a proper change control process.  Click on **"Compare & pull request"** so that we can create a pull request.
 
 **Create pull request** and then **Merge pull request** and then **Confirm merge**.  Optionally you can also delete the branch.
 
-![alt text](./docs/images/s6-13.png "Merge Pull Request")
+![Merge Pull Request](./docs/images/s6-13.png "Merge Pull Request")
 
-Checkout main branch back in Insomnia
+Open Insomnia and checkout the main branch using the Git Sync menu at the bottom left of the screen.
+
+#### 6.3 Tell
+
+>**TODO**
 
 ---
 
 ### Section 7: Automation
 
-#### Tell
+#### 7.1 Tell
 
 >**TODO**
 
-#### Show
+#### 7.2 Show
 
 Go to collection runner and **Run via CLI** from the menu.
 
@@ -686,7 +687,7 @@ inso run collection wrk_d6ba5b -i req_a6612a8edba546bf8dafbc0334830bc0 -i req_7d
 
 Run this in your terminal and show the output:
 
-![alt text](./docs/images/s7-2.png "Test Output")
+![Test Output](./docs/images/s7-2.png "Test Output")
 
 > The next step is optional if you want to show this running as part of a real pipeline.
 
@@ -694,7 +695,7 @@ We can use this as part of a pipeline.
 
 Create a `ci.yaml` file in `.github/workflows`:
 
-![alt text](./docs/images/s7-2.png "Create file")
+![Create file](./docs/images/s7-3.png "Create file")
 
 Add the following to the pipeline.  Talk through the linting step.
 
@@ -740,31 +741,35 @@ Commit and Push directly to main using GitHub UI, click on **Actions** to show t
 
 > **TODO: SCREENSHOT**
 
+#### 7.3 Tell
+
+>**TODO**
+
 ---
 
 ### Section 8: Mocking
 
-#### Tell
+#### 8.1 Tell
 
 API mocks are useful for simulating an API endpoint. For example, when building a front end while the backend API is under construction and unstable, Insomnia allows us to customize responses from a set of API paths to simulate a static API. This mocked URL can then replace our front-end API backend URL.
 
-#### Show
+#### 8.2 Show
 
-Open Insomnia and create a new mock server in your Project.
+Open Insomnia and create a new mock server in your Project.  We have a **Self-hosted Mock** server running in a Docker container so we can use this for the demonstration or you can choose to use a **Cloud Mock**.  Pick the most appropriate option for your prospective customer.
 
-![alt text](./docs/images/s8-1.png "Create mock")
+![Create mock server](./docs/images/s8-1.png "Create mock server")
 
 Then navigate to the **Design Document** and select the request **Get all employees**.
 
-Send the Request and Create a new mock server from the response by clicking on the **Mock** tab in the right hand pane and then selecting your new mock server from the drop down and then hit **Create**:
+Send the Request and Create a new mock server from the response by clicking on the **Mock** tab in the right hand pane and then selecting your newly created Mock Server from the drop down and then click **Create**:
 
 ![alt text](./docs/images/s8-2.png "Create mock")
 
 For the route, leave the default `/api/employees` and press **Submit**.
 
-Show mocking UI and talk through configuration options.
+Show mocking UI and talk through configuration options such as setting headers and status codes.
 
-Hit Test and show the response returned.
+Hit **Test** and show the mocked response returned.
 
 Copy the URL by clicking the copy icon next to the Test button and use this to replace the one our previous **Get all employees** request.
 
@@ -778,7 +783,7 @@ Navigate back to your **Get all employees** request, replace the URL with the mo
 
 ![alt text](./docs/images/s8-4.png "Invoke Mock")
 
-#### Tell
+#### 8.3 Tell
 
 >**TODO**
 
@@ -786,11 +791,11 @@ Navigate back to your **Get all employees** request, replace the URL with the mo
 
 ### Section 9: Postman Bulk Import
 
-#### Tell
+#### 9.1 Tell
 
 Insomnia supports importing and exporting. Currently, the supported import formats are Insomnia, Postman v2, HAR, OpenAPI (versions 3.0, 3.1), Swagger, WSDL, and cURL.  We will demonstrate how we can import our Postman environment into Insomnia.
 
-#### Show
+#### 9.2 Show
 
 Go to your Insomnia Project and click on the Import button.
 
@@ -804,6 +809,6 @@ Go into the Imported `Employees Directory` Request Collection and send a request
 
 Show that the after-response scripts have been migrated across successfully.
 
-#### Tell
+#### 9.3 Tell
 
 >**TODO**
