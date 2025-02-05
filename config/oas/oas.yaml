@@ -1,0 +1,165 @@
+openapi: 3.0.2
+
+info:
+  title: employees-directory-v1-dev
+  description: "This is a sample Employee Directory Server based on the OpenAPI 3.0 specification."
+  termsOfService: https://konghq.com/terms
+  contact:
+    email: david.macdonald@konghq.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+  status: development
+
+externalDocs:
+  description: Find out more on our Developer Portal
+  url: https://portal.us.portal.konghq.com/
+
+servers:
+- url: http://localhost:8000
+  description: Development Environment
+
+tags:
+- name: employee
+  description: Everything about our Employees
+  externalDocs:
+    description: Find out more on our Developer Portal
+    url: https://portal.us.portal.konghq.com/
+
+security: 
+  - oAuth2ClientCredentials: []
+  
+paths:
+  /api/employees:
+    get:
+      tags:
+      - employee
+      summary: Get all employees
+      description: Returns all employees
+      operationId: getEmployees
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+    post:
+      tags:
+      - employee
+      summary: Create a new employee
+      description: Create a new employee
+      operationId: addEmployee
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+      requestBody:
+        description: Create a new employee in the directory
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+
+  /api/employees/{employeeId}:
+    get:
+      tags:
+      - employee
+      summary: Find employee by ID
+      description: Returns a single employee
+      operationId: getEmployeeById
+      parameters:
+      - name: employeeId
+        in: path
+        description: ID of employee to return
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+        "400":
+          description: Invalid Employee ID supplied
+        "404":
+          description: Employee not found
+    delete:
+      tags:
+      - employee
+      summary: Delete an employee by ID
+      description: Deletes a single employee
+      operationId: deleteEmployeeById
+      parameters:
+      - name: employeeId
+        in: path
+        description: ID of employee to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+        "400":
+          description: Invalid Employee ID supplied
+        "404":
+          description: Employee not found
+
+
+components:
+
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: ClientID - sOr3UTEwwuHrj5nyxpDVNJnK5GuoHEsN Secret - 8tx6He8lOpQVVD2pBVZzfo6Zgz4kmUfI
+      flows: 
+        clientCredentials: 
+          tokenUrl: http://localhost:8080/realms/insomnia-demo/protocol/openid-connect/token
+          scopes: {}
+          
+  schemas:
+  
+    EmployeeRequest:
+     type: object
+     properties:
+       id:
+         type: string
+         example: "1234"
+       name:
+         type: string
+         example: John Doe
+       jobTitle:
+         type: string
+         example: Solutions Engineer
+       email:
+         type: string
+         example: john@email.com
+    EmployeeResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1234"
+        name:
+          type: string
+          example: John Doe
+        jobTitle:
+          type: string
+          example: Solutions Engineer
+        email:
+          type: string
+          example: john@email.com
+          
