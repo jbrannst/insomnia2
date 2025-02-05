@@ -94,7 +94,3 @@ services:
             - insomnia-demo-net
         ports:
             - "9000:80"
-
-volumes:
-    postgres_data:
-        driver: local
