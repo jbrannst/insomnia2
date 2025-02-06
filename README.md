@@ -298,7 +298,7 @@ Right click on the new folder and select "From Curl":
 Copy and paste our request to Keycloak into the text area and click on Import:
 
 ``` bash
-curl -s -X POST http://localhost:8080/realms/insomnia-demo/protocol/openid-connect/token -H "content-type: application/x-www-form-urlencoded" -H "accept: application/x-www-form-urlencoded, application/json" -H "Authorization: Basic c09yM1VURXd3dUhyajVueXhwRFZOSm5LNUd1b0hFc046OHR4NkhlOGxPcFFWVkQycEJWWnpmbzZaZ3o0a21VZkk=" -d "grant_type=client_credentials"
+curl -s -X POST http://localhost:8000/realms/insomnia-demo/protocol/openid-connect/token -H "content-type: application/x-www-form-urlencoded" -H "accept: application/x-www-form-urlencoded, application/json" -H "Authorization: Basic c09yM1VURXd3dUhyajVueXhwRFZOSm5LNUd1b0hFc046OHR4NkhlOGxPcFFWVkQycEJWWnpmbzZaZ3o0a21VZkk=" -d "grant_type=client_credentials"
 ```
 
 ![First Request](./docs/images/4-request-collections/s4-4.png "First Request")
@@ -568,14 +568,14 @@ Now do the same for the **Find Employee by ID** request:
 insomnia.test("The response has all properties", () => {
 
  const responseJson = insomnia.response.json();
- insomnia.expect(responseJson.id).to.have.lengthOf(4);
- insomnia.expect(responseJson.id).to.eql('1234');
+ insomnia.expect(responseJson.id).to.have.lengthOf(1);
+ insomnia.expect(responseJson.id).to.eql('1');
  insomnia.expect(responseJson.name).to.be.a('string');
- insomnia.expect(responseJson.name).to.eql('John Doe');
+ insomnia.expect(responseJson.name).to.eql('Chris');
  insomnia.expect(responseJson.jobTitle).to.be.a('string');
- insomnia.expect(responseJson.jobTitle).to.eql('Solutions Engineer');
+ insomnia.expect(responseJson.jobTitle).to.eql('Solutions Engineer Manager');
  insomnia.expect(responseJson.email).to.be.a('string');
- insomnia.expect(responseJson.email).to.eql('john@email.com');
+ insomnia.expect(responseJson.email).to.eql('chris@kongexample.com');
 
 });
 
@@ -626,7 +626,7 @@ First we need to parameterise the **Create a new employee** request by changing 
 
 ``` javascript
 {
-  "id": "{{uuid}}",
+  "id": "{{id}}",
   "name": "{{name}}",
   "jobTitle": "{{jobTitle}}",
   "email": "{{email}}"
@@ -737,6 +737,7 @@ jobs:
         --workingDir . \
         --env-var "oauth2ClientId=$KEYCLOAK_CLIENT_ID" \
         --env-var "oauth2ClientSecret=$KEYCLOAK_CLIENT_SECRET" \
+        --requestNamePattern "^(?!Delete an employee by ID$).*" \
         --verbose \
         --ci 2>/dev/null
       env:
