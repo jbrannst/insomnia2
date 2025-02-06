@@ -1,4 +1,4 @@
-# kong-insomnia-demo
+# se-insomnia-demo
 
 ## Overview
 
@@ -724,12 +724,21 @@ jobs:
 
     - name: Lint OpenAPI Spec
       run: |
-        inso lint spec $(yq '._id' $(echo -n .insomnia/ApiSpec/*)) --workingDir .
+        inso lint spec $(yq '._id' $(echo -n .insomnia/ApiSpec/*)) \
+        --workingDir .
 
     - name: Run Tests
       id: run-tests
       run: |
-        inso run collection $(yq '._id' $(echo -n .insomnia/Workspace/*)) -e $(yq '._id' $(echo -n .insomnia/Environment/*)) -n 5 -d ./test/runner.csv -w . --env-var "oauth2ClientId=$KEYCLOAK_CLIENT_ID" --env-var "oauth2ClientSecret=$KEYCLOAK_CLIENT_SECRET" --verbose 2>/dev/null
+        inso run collection $(yq '._id' $(echo -n .insomnia/Workspace/*)) \
+        --env $(yq '._id' $(echo -n .insomnia/Environment/*)) \
+        --iteration-data ./test/runner.csv \
+        --iteration-count 5 \
+        --workingDir . \
+        --env-var "oauth2ClientId=$KEYCLOAK_CLIENT_ID" \
+        --env-var "oauth2ClientSecret=$KEYCLOAK_CLIENT_SECRET" \
+        --verbose \
+        --ci 2>/dev/null
       env:
         KEYCLOAK_CLIENT_ID: ${{ secrets.KEYCLOAK_CLIENT_ID }}
         KEYCLOAK_CLIENT_SECRET: ${{ secrets.KEYCLOAK_CLIENT_SECRET }}
