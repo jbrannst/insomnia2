@@ -749,7 +749,9 @@ Note that as we are not pushing our Private environment to GitHub, we need to ge
 
 Commit and Push directly to main using GitHub UI, click on **Actions** to show the pipeline running and completing:
 
-> **TODO: SCREENSHOT**
+![alt text](./docs/images/7-automation/s7-4.png "Run via CLI")
+
+Feel free to explore the detailed output from the tests in the **Run Tests** section.
 
 #### 7.3 Tell
 
