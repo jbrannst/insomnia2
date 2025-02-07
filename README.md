@@ -170,7 +170,7 @@ Send a Get Request and observe that it fails as we dont have any credentials
 curl -s http://localhost:8000/api/employees | jq .
 ```
 
-![alt text](./docs/images/2-manual-testing/s2-2.png "Authentication Failure")
+![alt text](./docs/images/2-manual-testing/s2-3.png "Authentication Failure")
 
 Get an Access Token from KeyCloak:
 
@@ -178,7 +178,7 @@ Get an Access Token from KeyCloak:
 curl -s -X POST http://localhost:8080/realms/insomnia-demo/protocol/openid-connect/token -H "content-type: application/x-www-form-urlencoded" -H "accept: application/x-www-form-urlencoded, application/json" -H "Authorization: Basic c09yM1VURXd3dUhyajVueXhwRFZOSm5LNUd1b0hFc046OHR4NkhlOGxPcFFWVkQycEJWWnpmbzZaZ3o0a21VZkk=" -d "grant_type=client_credentials" | jq .
 ```
 
-![alt text](./docs/images/2-manual-testing/s2-3.png "Getting a Token")
+![alt text](./docs/images/2-manual-testing/s2-2.png "Getting a Token")
 
 This time get the Access Token and save to an environment variable.  Highlight how clunky this is getting already:
 
