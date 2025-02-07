@@ -92,6 +92,7 @@ echo "docker compose started"
 
 deck gateway sync ./config/kong/kong.yaml \
   --konnect-control-plane-name insomnia-demo \
-  --konnect-addr "https://${KONNECT_REGION}.api.konghq.com"
+  --konnect-addr "https://${KONNECT_REGION}.api.konghq.com" \
+  --konnect-token "${KONNECT_TOKEN}"
 
 echo "set up complete"
