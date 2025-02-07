@@ -6,7 +6,7 @@
 
 This demonstration will walk through a day in the life of a developer, showcasing how Insomnia can seamlessly integrate into their workflow.
 
-We’ll start where developers care most—the code—by examining the repository where the code resides. From there, we’ll highlight the challenges of manual API testing against the developers code and demonstrate how Insomnia simplifies the debugging process. Next, we’ll explore how importing an OpenAPI Specification (OAS) can streamline the design process, significantly improving the quality of their specs. Finally, we’ll demonstrate automated testing and how these tests can be incorporated into a CI/CD pipeline for consistency and reliability.
+We’ll start where developers care most—the code—by examining the repository where the code resides. From there, we’ll highlight the challenges of manual API testing against the developer's code and demonstrate how Insomnia simplifies the debugging process. Next, we’ll explore how importing an OpenAPI Specification (OAS) can streamline the design process, significantly improving the quality of the specs. Finally, we’ll demonstrate automated testing and how these tests can be incorporated into a CI/CD pipeline for consistency and reliability.
 
 **High Level Demo Structure:**
 
@@ -98,7 +98,7 @@ This will do the following:
 
 #### Setup GitHub Self-hosted Runner
 
-> Optional: Only required if you want to show integration with a real CI/CD pipeline
+> Optional: Only required if you want to show integration with a real CI/CD pipeline.
 
 Guidance available here:
 
@@ -132,13 +132,13 @@ sh delete.sh
 
 ### Situation
 
->**TODO**
+As a developer we've been tasked to create a new employee managment application, and we have a first version available.
 
 ### Section 1: Leading with Code
 
 #### 1.1 Tell
 
-This is a simple Go applications which offers CRUD operations on a list of employees. We can present the repository and show the resources and methods available
+This is a simple Go applications which offers CRUD operations on a list of employees. We can present the repository and show the resources and methods available.
 
 #### 1.2 Show
 
@@ -152,7 +152,7 @@ Specifically, highlight this part which shows what exactly our code is doing:
 
 #### 1.3 Tell
 
->**TODO**
+We've just had a look at our code, let's try it out!
 
 ---
 
@@ -164,7 +164,7 @@ Without a tool like Insomnia in place, invocation of APIs is cumbersome and comp
 
 #### 2.2 Show
 
-Send a Get Request and observe that it fails as we dont have any credentials
+Send a Get Request and observe that it fails as we dont have any credentials.
 
 ``` bash
 curl -s http://localhost:8000/api/employees | jq .
@@ -214,7 +214,7 @@ curl -s -X DELETE http://localhost:8000/api/employees/15 -H "Authorization: Bear
 
 #### 2.3 Tell
 
->**TODO**
+As we just saw, while possible, we need to remember and assemble complex commands in order to do even basic operations when authentication is required. If you only do this once maybe it's OK but you'll need to do this over and over, as will your colleagues.
 
 ---
 
@@ -222,7 +222,9 @@ curl -s -X DELETE http://localhost:8000/api/employees/15 -H "Authorization: Bear
 
 #### 3.1 Tell
 
-The purpose of this section is to introduce the Insomnia application and provide a view on the main components, whilst highlighting the governance functionality
+The purpose of this section is to introduce the Insomnia application and provide a view on the main components, whilst highlighting the governance functionality.
+
+Let's have a look at how Insomnia can help!
 
 #### 3.2 Show
 
@@ -243,7 +245,7 @@ Navigate to your SE Org and speak about the collaboration between SEs with our I
 
 Navigate to your Personal Org
 
-Create new Local Project in your personal Org and talk about storage control limitations that can be put in place:
+Create a new Local Project in your personal Org and talk about storage control limitations that can be put in place:
 
 ![Storage](./docs/images/3-insomnia-intro/s3-4.png "Storage")
 
@@ -255,7 +257,7 @@ Show rules on Insomnia Cloud (have this open in a tab in your browser already):
 
 #### 3.3 Tell
 
->**TODO**
+We just saw how we can use standardized credentials to sign in, how to organise work using Organisations and Projects, the objects we share and how they are stored. The security and governance of your data is a key differentiator for Kong, where Kong offers many options making collaboration and governance easy, without compromising on security.
 
 ---
 
@@ -264,6 +266,8 @@ Show rules on Insomnia Cloud (have this open in a tab in your browser already):
 #### 4.1 Tell
 
 The purpose of this section is to show how easy it is to create a collections of requests, importing from cURL commands, and to show how comprehensive the Insomnia tooling is.
+
+Let's create a similar set of requests we did with cURL in Insomnia, so we can reuse them in the future, and share to help our peers.
 
 #### 4.2 Show
 
@@ -313,7 +317,7 @@ Edit the Base Environment underneath Collection Environments:
 
 ![Environments](./docs/images/4-request-collections/s4-5.png "Environments")
 
-Lets store the KeyCloak base path as an environment variable as so:
+Lets store the KeyCloak base path as an environment variable:
 
 ``` json
 {
@@ -350,7 +354,7 @@ Click on the red tag and configure this as follows:
 Request: `[Employees Directory] POST Get Token`
 Filter: `$.access_token`
 
-Talk through the Trigger Behaviour options and pick one such as Always then click Done.
+Talk through the Trigger Behaviour options and pick one, such as Always, then click Done.
 
 **Send** the request and show that it is now working.
 
@@ -421,7 +425,7 @@ Right click on any of the requests that have been creted so far and show the **G
 
 #### 4.3 Tell
 
->**TODO**
+We explored collections, filtering, organizing with folders, importing from cURL, using variables, request chaining, generating values with Faker, pre- and post-request functions, setting headers and generating client code. Juggling tokens and complex flows just got more manageable!
 
 ---
 
@@ -445,7 +449,7 @@ Find the issue with the OpenAPI Specification and fix it by deleting line 13.
 
 ![Fix OAS](./docs/images/5-design-documents/s5-1.png "Fix OAS")
 
-Show the interactive documentation in the preview pane on the right.  Chose a request and demonstrate the try it now functionality.  Remember to client the Authorize button first, the Client Credentials are available in the modal that is presented.
+Show the interactive documentation in the preview pane on the right.  Chose a request and demonstrate the try it now functionality.  Remember to click the Authorize button first, the Client Credentials are available in the modal that is presented.
 
 ![Docs Preview Auth](./docs/images/5-design-documents/s5-3.png "Docs Preview Auth")
 
@@ -488,7 +492,7 @@ Make a minor change to the description field of the OpenAPI Specification file a
 
 #### 5.3 Tell
 
->**TODO**
+Using linting really helps finding simple errors early. Previewing documentation is a great motivator to create better documentation. Custom rulesets ensure you can apply your best practices.
 
 ---
 
@@ -496,7 +500,9 @@ Make a minor change to the description field of the OpenAPI Specification file a
 
 #### 6.1 Tell
 
->**TODO**
+Testing APIs are essential to ensure they work as intended. Defining tests based on the specification ensures the specification is aligned with the actual API. Maintaining tests in an implementation-agnostic tool like Insomnia provides freedom to refactor the implementation in the future.
+
+In order to work in more complex environments, environment management is required. Running tests in an automated way like CI/CD requires a reliable command line interface.
 
 #### 6.2 Show
 
@@ -663,7 +669,7 @@ Open Insomnia and checkout the main branch using the Git Sync menu at the bottom
 
 #### 6.3 Tell
 
->**TODO**
+Insomnia not just supports environments and test automation, it also supports test grouping with collection runner and pulling parameters from external sources like a .csv file. Insomnia supports modern pull request flows, making API testing a charm.
 
 ---
 
@@ -671,7 +677,7 @@ Open Insomnia and checkout the main branch using the Git Sync menu at the bottom
 
 #### 7.1 Tell
 
->**TODO**
+Now that we have tests and a way to interact with Git, we'll want to run tests automatically (CI/CD). Let's have a look at using the collection runner on the command line and a GitHubActions pipeline example.
 
 #### 7.2 Show
 
@@ -755,7 +761,7 @@ Feel free to explore the detailed output from the tests in the **Run Tests** sec
 
 #### 7.3 Tell
 
->**TODO**
+We just saw how you can execute a collection of tests and set up CI/CD automation to have them run automatically as code is changed.
 
 ---
 
@@ -797,7 +803,7 @@ Navigate back to your **Get all employees** request, replace the URL with the mo
 
 #### 8.3 Tell
 
->**TODO**
+We just saw how you can create new Mock servers using Insomnia. Mocking can be done locally or in the cloud, what ever fits your organisation best.
 
 ---
 
@@ -823,4 +829,4 @@ Show that the after-response scripts have been migrated across successfully.
 
 #### 9.3 Tell
 
->**TODO**
+Importing and exporting to and from Insomnia enables moving from one tool to another, as well as backing up your data. We just saw a simple way to import a postman collection, including environments and scripts.
