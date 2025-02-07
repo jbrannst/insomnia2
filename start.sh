@@ -45,6 +45,7 @@ openssl req -new -x509 -nodes -newkey rsa:2048 -subj "/CN=insomnia-demo/C=US" -k
 export CERT=$(awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' ./config/tls/tls.crt)
 
 # Create Kong Konnect Control Plane
+echo "about to create control plane"
 
 export CONTROL_PLANE=$(curl --request POST \
   --url "https://${KONNECT_REGION}.api.konghq.com/v2/control-planes" \
@@ -53,9 +54,17 @@ export CONTROL_PLANE=$(curl --request POST \
   --header "Authorization: Bearer ${KONNECT_TOKEN}" \
   --data '{"name":"insomnia-demo","description":"Control Plane for Insomnia demonstrations.","cluster_type":"CLUSTER_TYPE_HYBRID","cloud_gateway":false,"proxy_urls":[{"host":"localhost","port":443,"protocol":"https"}],"labels":{"labels":"insomnia-demo"}}' | jq . -r)
 
+echo "control plane details ${CONTROL_PLANE}"
+
 # Grab Parameters Required for Docker Compose to Associate our Gateway to the Control Plane and to Upload the Cert
 
 export CONTROL_PLANE_ID=$(echo $CONTROL_PLANE | jq .id -r)
+
+# check we can have a control plane id
+if [ -z "$CONTROL_PLANE" ] || [ "$CONTROL_PLANE" == "null" ]; then
+  echo "CONTROL_PLANE is either null or empty. Ensure delete.sh has been run to remove old control plane. Exiting..."
+  exit 1
+fi
 
 export KONG_CLUSTER_CONTROL_PLANE=$(echo $CONTROL_PLANE | jq .config.control_plane_endpoint -r | sed 's|https://||'):443
 export KONG_CLUSTER_SERVER_NAME=$(echo $CONTROL_PLANE | jq .config.control_plane_endpoint -r | sed 's|https://||')
