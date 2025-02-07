@@ -61,8 +61,8 @@ echo "control plane details ${CONTROL_PLANE}"
 export CONTROL_PLANE_ID=$(echo $CONTROL_PLANE | jq .id -r)
 
 # check we can have a control plane id
-if [ -z "$CONTROL_PLANE" ] || [ "$CONTROL_PLANE" == "null" ]; then
-  echo "CONTROL_PLANE is either null or empty. Ensure delete.sh has been run to remove old control plane. Exiting..."
+if [ -z "${CONTROL_PLANE_ID}" ] || [ "${CONTROL_PLANE_ID}" == "null" ]; then
+  echo "CONTROL_PLANE is either null or empty. Ensure delete.sh has been run to remove the old control plane. Exiting..."
   exit 1
 fi
 
