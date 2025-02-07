@@ -332,7 +332,7 @@ Go back to the request and refer to environment variable:
 Import another cURL command into our folder to get all employees:
 
 ``` bash
-curl http://localhost:8090/api/employees -H "Authorization: Bearer $TOKEN"
+curl http://localhost:8000/api/employees -H "Authorization: Bearer $TOKEN"
 ```
 
 Rename the Request to Get All Employees (this isn't essential but does make the demo easier to follow).
