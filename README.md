@@ -302,7 +302,7 @@ Right click on the new folder and select "From Curl":
 Copy and paste our request to Keycloak into the text area and click on Import:
 
 ``` bash
-curl -s -X POST http://localhost:8000/realms/insomnia-demo/protocol/openid-connect/token -H "content-type: application/x-www-form-urlencoded" -H "accept: application/x-www-form-urlencoded, application/json" -H "Authorization: Basic c09yM1VURXd3dUhyajVueXhwRFZOSm5LNUd1b0hFc046OHR4NkhlOGxPcFFWVkQycEJWWnpmbzZaZ3o0a21VZkk=" -d "grant_type=client_credentials"
+curl -s -X POST http://localhost:8080/realms/insomnia-demo/protocol/openid-connect/token -H "content-type: application/x-www-form-urlencoded" -H "accept: application/x-www-form-urlencoded, application/json" -H "Authorization: Basic c09yM1VURXd3dUhyajVueXhwRFZOSm5LNUd1b0hFc046OHR4NkhlOGxPcFFWVkQycEJWWnpmbzZaZ3o0a21VZkk=" -d "grant_type=client_credentials"
 ```
 
 ![First Request](./docs/images/4-request-collections/s4-4.png "First Request")
