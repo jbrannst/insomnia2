@@ -363,7 +363,7 @@ As before, Import the next cURL command into our folder to create a new employee
 ``` bash
 curl -s -X POST http://localhost:8000/api/employees \
   -H "Authorization: Bearer $TOKEN" \
-  -d '{"id": "15", "name": "Jane Doe", "jobTitle": "Solutions Engineer", "email": "jane%40email.com" }'
+  -d '{"id": "15", "name": "Jane Doe", "jobTitle": "Solutions Engineer", "email": "jane@email.com" }'
 ```
 
 Rename the request to `Create New Employee`.
