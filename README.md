@@ -343,7 +343,7 @@ Rename the Request to Get All Employees (this isn't essential but does make the 
 
 Mention that you could run our previous command and then quickly copy and paste it across but this wouldnt be scalable.  We can use request chaining to solve for this.
 
-Change this to use request chaining to get the token in the Authorization Header by selecting **Response -> Body Attribute** (right clicking onfield with Bearer in it):
+Change this to use request chaining to get the token in the Authorization Header by selecting **Response -> Body Attribute** (right clicking on field with Bearer in it):
 
 ![Request Chaining](./docs/images/4-request-collections/s4-8.png "Request Chaining")
 
