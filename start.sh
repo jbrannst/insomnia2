@@ -64,6 +64,7 @@ export KONG_CLUSTER_TELEMETRY_ENDPOINT=$(echo $CONTROL_PLANE | jq .config.teleme
 export KONG_CLUSTER_TELEMETRY_SERVER_NAME=$(echo $CONTROL_PLANE | jq .config.telemetry_endpoint -r | sed 's|https://||')
 
 # Update Certificate on Konnect Control Plane
+echo "about to update the certificate on Konnect control plane"
 
 curl --request POST \
   --url "https://${KONNECT_REGION}.api.konghq.com/v2/control-planes/${CONTROL_PLANE_ID}/dp-client-certificates" \
@@ -72,10 +73,16 @@ curl --request POST \
 
 # Run Docker Compose to Deploy Kong Gateway, Backend Application, KeyCloak and Insomnia Mock Server
 
+echo "about to start docker compose"
+
 docker compose up -d
+
+echo "docker compose started"
 
 # Configure Kong Gateway to Proxy to Backend Application and Use OIDC
 
 deck gateway sync ./config/kong/kong.yaml \
   --konnect-control-plane-name insomnia-demo \
   --konnect-addr "https://${KONNECT_REGION}.api.konghq.com"
+
+echo "set up complete"
