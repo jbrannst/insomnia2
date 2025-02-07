@@ -144,7 +144,7 @@ This is a simple Go applications which offers CRUD operations on a list of emplo
 
 Show Employee directory code in repository and show endpoints
 
-<https://github.com/macdonald-kong/insomnia-demo/blob/master/src/main.go>
+<https://github.com/kong/se-insomnia-demo/blob/master/src/main.go>
 
 Specifically, highlight this part which shows what exactly our code is doing:
 
