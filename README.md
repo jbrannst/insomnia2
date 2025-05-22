@@ -730,19 +730,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Lint OpenAPI Spec
+    - name: List files
       run: |
-        inso lint spec $(yq '._id' $(echo -n .insomnia/ApiSpec/*)) \
-        --workingDir .
+        ls -al
+      
+    - name: Extract OpenAPI Spec
+      run: |
+        inso export spec -w my_design_document.yaml $(yq '.spec.meta.id' $(echo -n my_design_document.yaml)) > openapi-from-insomnia.yaml 
+        
+#    - name: Lint OpenAPI Spec
+#      run: |
+#        inso lint spec -w my_design_document.yaml $(yq '.spec.meta.id' $(echo -n my_design_document.yaml)) 
+
 
     - name: Run Tests
       id: run-tests
       run: |
-        inso run collection $(yq '._id' $(echo -n .insomnia/Workspace/*)) \
-        --env $(yq '._id' $(echo -n .insomnia/Environment/*)) \
-        --iteration-data ./test/runner.csv \
-        --iteration-count 5 \
-        --workingDir . \
+        inso run collection  -w my_design_document.yaml $(yq '.meta.id' $(echo -n my_design_document.yaml)) \
+        --env $(yq '.environments.meta.id' $(echo -n my_design_document.yaml)) \
         --env-var "oauth2ClientId=$KEYCLOAK_CLIENT_ID" \
         --env-var "oauth2ClientSecret=$KEYCLOAK_CLIENT_SECRET" \
         --requestNamePattern "^(?!Delete an employee by ID$).*" \
