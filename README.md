@@ -574,14 +574,14 @@ Now do the same for the **Find Employee by ID** request:
 insomnia.test("The response has all properties", () => {
 
  const responseJson = insomnia.response.json();
- insomnia.expect(responseJson.id).to.have.lengthOf(1);
- insomnia.expect(responseJson.id).to.eql('1');
+ insomnia.expect(responseJson.id).to.have.lengthOf(4);
+ insomnia.expect(responseJson.id).to.eql('1234');
  insomnia.expect(responseJson.name).to.be.a('string');
- insomnia.expect(responseJson.name).to.eql('Chris');
+ insomnia.expect(responseJson.name).to.eql('John Doe');
  insomnia.expect(responseJson.jobTitle).to.be.a('string');
- insomnia.expect(responseJson.jobTitle).to.eql('Solutions Engineer Manager');
+ insomnia.expect(responseJson.jobTitle).to.eql('Solutions Engineer');
  insomnia.expect(responseJson.email).to.be.a('string');
- insomnia.expect(responseJson.email).to.eql('chris@kongexample.com');
+ insomnia.expect(responseJson.email).to.eql('john@email.com');
 
 });
 
