@@ -441,6 +441,11 @@ Design Documents (also called Documents) hold specifications, API requests, and 
 
 Navigate back to your Personal Project
 
+** Setup a new Project with Git Sync ** to your forked repository on GitHub.
+
+![Git Sync Setup](./docs/images/5-design-documents/s5-2.png "Git Sync Setup")
+
+
 Create a new **Design Document**
 
 Take the OAS file from `./config/oas/oas.yaml` and copy into Insomnia.  Useful to have this open in your text/code editor ahead of time.
@@ -453,15 +458,11 @@ Show the interactive documentation in the preview pane on the right.  Chose a re
 
 ![Docs Preview Auth](./docs/images/5-design-documents/s5-3.png "Docs Preview Auth")
 
-Setup Git Sync to your forked repository on GitHub.
-
-![Git Sync Setup](./docs/images/5-design-documents/s5-2.png "Git Sync Setup")
-
 **Commit changes** to the GitHub Repository, ensuring that all objects are staged, you provide a sensible commit message and hit Commit and push.
 
 ![Commiting Changes](./docs/images/5-design-documents/s5-7.png "Commiting Changes")
 
-Bring up the git repository in GitHub or the tooling of your choice and talk through what has been created in the `.insomnia` folder.
+Bring up the git repository in GitHub or the tooling of your choice and talk through what has been created in the document.
 
 ![Git Repository Contents](./docs/images/5-design-documents/s5-8.png "Git Repository Contents")
 
