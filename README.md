@@ -644,8 +644,7 @@ This will show errors on each of the tags but these can be ignored as the data w
 
 ![Parameterize the post request](./docs/images/6-testing/s6-9.png "Parameterize the post request")
 
-**warning upload data seems to be missing or broken**
-Click on the **Upload Data** button and use the csv file found in this repository `./test/runner.csv`:
+Click on the **Upload Data** button found on the **Collection Runner** interface and use the csv file found in this repository `./test/runner.csv`:
 
 ![Csv Test Data File](./docs/images/6-testing/s6-10.png "Csv Test Data File")
 
@@ -667,8 +666,9 @@ We want to merge our feature branch with the main branch but in most organisatio
 
 ![Merge Pull Request](./docs/images/6-testing/s6-13.png "Merge Pull Request")
 
-**warning checking out the main branch will wipe out your collections and tests** You need to delete the Document and re-import the git repository.
-Open Insomnia and checkout the main branch using the Git Sync menu at the bottom left of the screen.
+**Warning checking out the main branch will wipe out your collections and tests** You'd need to delete the Document and re-import the git repository.
+
+**SKIP THIS**: Open Insomnia and checkout the main branch using the Git Sync menu at the bottom left of the screen.
 
 #### 6.3 Tell
 
@@ -730,19 +730,6 @@ jobs:
     
     - name: Checkout
       uses: actions/checkout@v4
-
-    - name: List files
-      run: |
-        ls -al
-      
-    - name: Extract OpenAPI Spec
-      run: |
-        inso export spec -w my_design_document.yaml $(yq '.spec.meta.id' $(echo -n my_design_document.yaml)) > openapi-from-insomnia.yaml 
-        
-#    - name: Lint OpenAPI Spec
-#      run: |
-#        inso lint spec -w my_design_document.yaml $(yq '.spec.meta.id' $(echo -n my_design_document.yaml)) 
-
 
     - name: Run Tests
       id: run-tests
